@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #e3e6e6;
+            color: #0f1111;
+        }
+
+        /* ---------- Header ---------- */
+        header { position: sticky; top: 0; z-index: 10; }
+
+        .nav_bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            height: 60px;
+            padding: 0 10px;
+            background-color: #131921;
+            color: white;
+        }
+
+        .border {
+            padding: 8px;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        .border:hover { border-color: white; }
+
+        .nav_logo .logo {
+            width: 100px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo::after {
+            content: "amazon.in";
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav_address {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            column-gap: 4px;
+        }
+        .nav_address p:first-child { width: 100%; color: #ccc; }
+        .nav_address i { color: white; font-size: 14px; }
+
+        /* Search bar */
+        .nav_search {
+            flex: 1;
+            display: flex;
+            height: 40px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .nav_search select {
+            width: 50px;
+            border: none;
+            background-color: #e6e6e6;
+            padding-left: 6px;
+            cursor: pointer;
+        }
+        .nav_search input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0 10px;
+            font-size: 16px;
+        }
+        .add_icon {
+            width: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #febd69;
+            color: #131921;
+            cursor: pointer;
+        }
+        .add_icon:hover { background-color: #f3a847; }
+
+        /* Right side items */
+        .loaction { display: flex; align-items: center; gap: 4px; }
+        .flag { width: 24px; height: 16px; display: block; }
+        .lang { font-weight: bold; font-size: 14px; }
+
+        .signIn p, .return_and_order p { font-size: 12px; }
+        .signIn .account, .return_and_order .order { font-size: 14px; font-weight: bold; }
+        .signIn section { display: none; }
+
+        .cart { display: flex; align-items: center; gap: 6px; font-weight: bold; }
+        .cart i { font-size: 22px; }
+
+        /* Menu bar */
+        .nav_menu {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            height: 40px;
+            padding: 0 15px;
+            background-color: #232f3e;
+            color: white;
+            font-size: 14px;
+        }
+        .nav_menu > div { cursor: pointer; padding: 4px 6px; border: 1px solid transparent; }
+        .nav_menu > div:hover { border-color: white; }
+        .font_menu { color: white; }
+
+        /* ---------- Main body ---------- */
+        .main_Body {
+            position: relative;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .home_image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            display: block;
+            -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+        }
+
+        .imgBox {
+            position: relative;
+            margin-top: -300px;
+            padding: 0 20px 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .item_box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 12px;
+            height: 420px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .innerBox {
+            background-color: #f0f2f2;
+            border-radius: 4px;
+            transition: transform 0.2s, background-color 0.2s;
+            cursor: pointer;
+        }
+        .innerBox:hover {
+            background-color: #dde0e0;
+            transform: scale(1.03);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 900px) {
+            .nav_address, .loaction, .return_and_order { display: none; }
+            .nav_menu { gap: 12px; overflow-x: auto; white-space: nowrap; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav_bar">
+            <div class="nav_logo border">
+                <div class="logo"></div>
+            </div>
+            <div class="nav_address border">
+                <p style="color: white;font-size: smaller;">Deliver to</p>
+                <div class="add_logo "></div>
+                <i class="fa-solid fa-location-dot"></i>
+                <p style="color: white; font-size: small;">India</p>
+            </div>
+
+            <div class="nav_search ">
+                <select>
+                    <option value="">All</option>
+                </select>
+                <input placeholder="Search Amazon" style="font-size: larg;">
+                <div class="add_icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+
+            <div class="loaction border">
+                <div class="india"><img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='60' height='13.3' fill='%23ff9933'/%3E%3Crect y='13.3' width='60' height='13.4' fill='%23fff'/%3E%3Crect y='26.7' width='60' height='13.3' fill='%23138808'/%3E%3Ccircle cx='30' cy='20' r='5' fill='none' stroke='%23000080'/%3E%3C/svg%3E" alt="" class="flag"></div>
+                <div class="lang">EN</div>
+            </div>
+            <div class="signIn border">
+                <p class="signin">Hello, sign in</p>
+                <p class="account">Accounts and Lists</p>
+                <section>
+                    <option value=""></option>
+                </section>
+            </div>
+            <div class="return_and_order border">
+                <p class="return">Return</p>
+                <p class="order"> & Order</p>
+            </div>
+            <div class="cart border">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <p>Cart</p>
+            </div>
+        </div>
+        <div class="nav_menu">
+            <div style="display: flex;"><i class="fa-solid fa-bars"></i>
+                <p style="color: white; padding-left: 10px;">All</p>
+            </div>
+            <div>
+                <p class="font_menu">Today's Deal</p>
+            </div>
+            <div>
+                <p class="font_menu">Registry</p>
+            </div>
+            <div>
+                <p class="font_menu">Prime Video </p>
+            </div>
+            <div>
+                <p class="font_menu">Gift Card</p>
+            </div>
+            <div>
+                <p class="font_menu">Customer Service</p>
+            </div>
+            <div>
+                <p class="font_menu">Sell</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="main_Body">
+        <img src="https://m.media-amazon.com/images/I/619geyiQI5L._SX3000_.jpg" alt="" class="home_image">
+
+        <div class="imgBox">
+            <div class="item_box">
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+            </div>
+            <div class="item_box">
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+            </div>
+            <div class="item_box">
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+            </div>
+            <div class="item_box">
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+            </div>
+            <div class="item_box">
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+            </div>
+            <div class="item_box">
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+            </div>
+            <div class="item_box">
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+                <div class="innerBox"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
