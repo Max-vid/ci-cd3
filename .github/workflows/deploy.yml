@@ -1,17 +1,11 @@
-name: Deploy
+name: Deploy Diagnostic
 
-on: # trigger
-  workflow_call: # whenever this workflow needs to be called from another
+on:
+  workflow_call:
 
 jobs:
   build:
     runs-on: self-hosted
     steps:
-      - name: Code clone
-        uses: actions/checkout@v4
-     
-      - name: Deploy via nginx 
-        run: cp index.html /var/www/html
-     
-      - name: Deploy the code
-        run: echo "Code Deployed to AWS EC2 instance"
+      - name: Test runner
+        run: echo "Self-hosted runner works"
