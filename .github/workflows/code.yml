@@ -12,7 +12,7 @@ jobs:
      #step in the workflow
      steps:
        - name: Clone the code
-         uses: actions/checkout@v7
+         uses: actions/checkout@v4
 
 
        - name: Print the message
