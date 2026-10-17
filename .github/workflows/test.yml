@@ -1,11 +1,16 @@
-name: Test
+name: Test Workflow
 
-on: # trigger
-  workflow_call: # whenever this workflow needs to be called from another
+on:
+  push:
+  pull_request:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Test the code
-        run: echo "Code Test using Sonar / Pytest"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check files
+        run: ls -la
